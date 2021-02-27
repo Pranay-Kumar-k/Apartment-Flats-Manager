@@ -1,0 +1,20 @@
+GET http://localhost:5000/data?page=2&limit=2
+
+###
+POST http://localhost:5000/auth/register
+Content-Type: application/json
+
+{
+    "email":"abcde@gmail.com",
+    "password":"123456",
+    "name":"hell"
+}
+
+###
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+    "email":"abcdeklnl@gmail.com",
+    "password":"123456"
+}
