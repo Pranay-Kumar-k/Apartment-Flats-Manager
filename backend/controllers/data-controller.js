@@ -20,9 +20,10 @@ const getData = (request,response) => {
 
 function paginatedResults(model) {
     return async (req, res, next) => {
+      // const query  = req.query.q;
       const page = parseInt(req.query.page);
       const limit = parseInt(req.query.limit);
-      let filterBy = filter == "tenant" ? 1 : filter == "owner" ? -1 : 0;
+      // let filterBy = filter == "tenant" ? 1 : filter == "owner" ? -1 : 0;
       const startIndex = (page - 1) * limit;
       const endIndex = page * limit;
   
@@ -44,7 +45,8 @@ function paginatedResults(model) {
   
       try {
         results.current = await model.find().limit(limit).skip(startIndex).exec();
-        res.pagination = results.filter((item) => item.flat_type === filter)
+        // results  = await results.filter((item) => item.flat_type === filter)
+        res.pagination = results
         next();
       } catch (e) {
         res.status(500).json({ message: e.message });
