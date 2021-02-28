@@ -2,8 +2,8 @@ const express = require("express");
 const User =  require("../models/admin");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
-dotenv.config();
+// const dotenv = require("dotenv");
+// dotenv.config();
 
 const {validationResult} = require("express-validator");
 
@@ -43,20 +43,24 @@ const loginUser = async (req, res) => {
   
       const { email, password } = req.body;
       const user = await User.findOne({ email });
-  
+  // console.log(user)
       if (!user) {
         throw new Error("Account doesn't exists");
       }
   
       const validPassword = await bcrypt.compare(password, user.password);
-  
+  // console.log(validPassword)
+  // const authToken = jwt.sign(data, process.env.SECRET_KEY);
+
       if (validPassword) {
-        const { email } = user;
+        const { email,name } = user;
         const data = { email: email };
         const authToken = jwt.sign(data, process.env.SECRET_KEY);
+        console.log(authToken)
         res.json({
           auth: email,
-          authToken,
+          name:name,
+          token:authToken,
         //   user,
           message: "Logged in successfully",
         });
@@ -69,6 +73,7 @@ const loginUser = async (req, res) => {
       });
     }
   };
+
 
 
 module.exports = {registerUser,loginUser}

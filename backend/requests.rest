@@ -1,4 +1,4 @@
-GET http://localhost:5000/data?page=2&limit=2
+GET http://localhost:5000/data
 
 ###
 POST http://localhost:5000/auth/register
@@ -15,6 +15,6 @@ POST http://localhost:5000/auth/login
 Content-Type: application/json
 
 {
-    "email":"abcdeklnl@gmail.com",
+    "email":"abcde@gmail.com",
     "password":"123456"
 }
